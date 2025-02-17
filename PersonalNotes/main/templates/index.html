@@ -7,8 +7,11 @@
     <!-- 引入 Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .note-card {
+        body {
             background-color: #f8f9fa;
+        }
+        .note-card {
+            background-color: #ffffff;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -23,6 +26,12 @@
             font-size: 1.1rem;
             color: #555;
         }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -33,20 +42,27 @@
         <div class="row">
             {% for note in notes %}
                 <div class="col-12 mb-4">
-                    <div class="note-card">
-                        <a href="/index/{{ note.slug }}">{{ note.title }}</a>
-                        <h6>{{ note.content|truncatechars:20 }}</h6>
+                    <div class="note-card p-3 border rounded d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="/index/{{ note.slug }}" class="note-title">{{ note.title }}</a>
+                            <h6 class="note-content">{{ note.content|truncatechars:20 }}</h6>
+                        </div>
+                        <!-- 刪除按鈕的表單 -->
+                        <form action="{% url 'delete_note' note.slug %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-secondary">刪除</button>
+                        </form>
                     </div>
                 </div>
             {% empty %}
                 <p class="text-center">No notes available.</p>
             {% endfor %}
         </div>
-
+        
         <!-- 新增筆記表單 -->
         <div class="form-container mt-4">
             <h4>新增筆記</h4>
-            <form action="\" method="POST"> 
+            <form action="" method="POST"> 
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="title">Title:</label>
@@ -58,13 +74,13 @@
                 </div>
                 <div class="form-group">
                     <label for="content">Content:</label>
-                    <textarea class="form-control" id="content" name="content" required></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">新增</button>
             </form>
         </div>
     </div>
-
+    
     <!-- 引入 Bootstrap 的 JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
