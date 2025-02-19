@@ -16,12 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mysite.views import homepage , showdetail , delete_note
+from mysite.views import homepage , showdetail , delete_note 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',homepage),
-    path('index/<slug:slug>',showdetail),
-    path('delete/<slug:note_slug>/', delete_note, name='delete_note'),  # 這裡要跟 HTML `{% url 'delete_note' note.slug %}` 對應
-
-    
+    path('',homepage , name='homepage'),
+    path('index/<slug:slug>',showdetail , name = 'showdetail'),
+    path('delete/<slug:note_slug>/', delete_note, name='delete_note'),  #將前面的路徑存入name裡面
 ]

@@ -44,14 +44,18 @@
                 <div class="col-12 mb-4">
                     <div class="note-card p-3 border rounded d-flex justify-content-between align-items-center">
                         <div>
-                            <a href="/index/{{ note.slug }}" class="note-title">{{ note.title }}</a>
+                            <a href="{% url 'showdetail' note.slug %}" class="note-title">{{ note.title }}</a>
                             <h6 class="note-content">{{ note.content|truncatechars:20 }}</h6>
                         </div>
-                        <!-- 刪除按鈕的表單 -->
-                        <form action="{% url 'delete_note' note.slug %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-secondary">刪除</button>
-                        </form>
+                        <div>
+                            <!-- 編輯按鈕 -->
+                            <a href="" class="btn btn-outline-primary">編輯</a>
+                            <!-- 刪除按鈕的表單 -->
+                            <form action="{% url 'delete_note' note.slug %}" method="POST" style="display:inline;"> 
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-secondary">刪除</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             {% empty %}
@@ -80,7 +84,7 @@
             </form>
         </div>
     </div>
-    
+
     <!-- 引入 Bootstrap 的 JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

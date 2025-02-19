@@ -28,3 +28,7 @@ def delete_note(request , note_slug): #從urls.py中取得slug
         note.delete()
     return redirect('/')  
     
+
+
+
+
