@@ -30,5 +30,17 @@ def delete_note(request , note_slug): #從urls.py中取得slug
     
 
 
+def edit_note(request , edit_note_slug):
+    note = get_object_or_404(Note,slug=edit_note_slug)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        slug = request.POST.get('slug')
+        content = request.POST.get('content')
+        note.title = title
+        note.slug = slug
+        note.content = content
+        note.save()
 
+        return redirect('showdetail',slug = note.slug)
+    return render(request , 'edit_note.html', {'note': note})
 
