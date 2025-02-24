@@ -42,5 +42,5 @@ def edit_note(request , edit_note_slug):
         note.save()
 
         return redirect('showdetail',slug = note.slug)
-    return render(request , 'edit_note.html', {'note': note})
+    return render(request , 'edit_note.html', {'note_dic': note}) #鍵是 'note'，而值是變數 note  用字典會比local()安全且快速
 
