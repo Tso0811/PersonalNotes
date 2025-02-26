@@ -12,11 +12,9 @@ def homepage(request) :
         note.save()
         return redirect('/')
     
-    notes = Note.objects.all()
-    note_list = list()
-    for count , note in enumerate (notes,start=1) :
-        note_list.append('NO:{}:'.format(count)+str(note)+'<br>')
-    return render(request,'index.html',locals())
+    notes = Note.objects.all().order_by('-add_time')
+    
+    return render(request,'index.html',{'notes':notes})
 
 def showdetail (request , slug ):
     detail = Note.objects.get(slug = slug)
