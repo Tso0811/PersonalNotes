@@ -1,6 +1,8 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from django.http import HttpResponse
+from django.views.generic import  CreateView
 from mysite.models import Note
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 def homepage(request) :
@@ -10,7 +12,7 @@ def homepage(request) :
         content = request.POST['content']
         note = Note(title=title,slug=slug,content=content)
         note.save()
-        return redirect('/')
+        return redirect('homepage')
     
     notes = Note.objects.all().order_by('-add_time')
     
@@ -24,7 +26,7 @@ def delete_note(request , note_slug): #從urls.py中取得slug
     if request.method == 'POST':
         note = get_object_or_404(Note, slug = note_slug) #如果找到指定的條件 會return 反之則return 404錯誤
         note.delete()
-    return redirect('/')  
+    return redirect('homepage')  
     
 
 

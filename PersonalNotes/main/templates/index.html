@@ -9,100 +9,211 @@
     <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --card-bg: #2d2d2d;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #bb86fc;
+            --accent-color-hover: #9d4edd;
+            --danger-color: #cf6679;
+            --danger-hover: #a82e42;
+            --border-color: #383838;
+        }
+        
         body {
-            background-color: #f8f9fa;
+            background-color: var(--primary-bg);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-primary);
             padding-bottom: 40px;
         }
+        
         .page-header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #4a1d96 0%, #8b5cf6 100%);
             color: white;
             padding: 30px 0;
             margin-bottom: 30px;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .note-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-bottom: 25px;
-            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
             overflow: hidden;
         }
+        
+        .page-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+            background-size: 5px 5px;
+            opacity: 0.1;
+        }
+        
+        .note-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        
         .note-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+            border-color: var(--accent-color);
         }
+        
         .note-title {
             font-size: 1.3rem;
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
             text-decoration: none;
         }
+        
         .note-title:hover {
-            color: #2575fc;
+            color: var(--accent-color);
         }
+        
         .note-content {
             font-size: 0.95rem;
-            color: #666;
+            color: var(--text-secondary);
             margin-top: 5px;
         }
+        
         .note-actions {
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
             padding-top: 12px;
             margin-top: 12px;
         }
+        
         .form-container {
-            background: white;
+            background: var(--secondary-bg);
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
         }
+        
         .section-header {
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
-            color: #444;
+            color: var(--text-primary);
+            position: relative;
         }
+        
+        .section-header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: #888;
+            color: var(--text-secondary);
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px dashed var(--border-color);
         }
+        
         .btn-custom-primary {
-            background-color: #2575fc;
-            border-color: #2575fc;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
         }
+        
         .btn-custom-primary:hover {
-            background-color: #1a65e0;
-            border-color: #1a65e0;
+            background-color: var(--accent-color-hover);
+            border-color: var(--accent-color-hover);
         }
+        
         .btn-custom-outline {
-            color: #2575fc;
-            border-color: #2575fc;
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background-color: transparent;
         }
+        
         .btn-custom-outline:hover {
-            background-color: #2575fc;
+            background-color: var(--accent-color);
             color: white;
         }
+        
         .btn-custom-danger {
-            color: #dc3545;
-            border-color: #dc3545;
+            color: var(--danger-color);
+            border-color: var(--danger-color);
+            background-color: transparent;
         }
+        
         .btn-custom-danger:hover {
-            background-color: #dc3545;
+            background-color: var(--danger-color);
             color: white;
+        }
+        
+        .form-control, .form-select {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
+        }
+        
+        .form-label {
+            color: var(--text-primary);
+        }
+        
+        /* Neon glow effect for header */
+        .header-glow {
+            text-shadow: 0 0 10px rgba(187, 134, 252, 0.7);
+        }
+        
+        /* Glassmorphism for card highlight */
+        .glass-highlight {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(circle, rgba(187, 134, 252, 0.1) 0%, rgba(187, 134, 252, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .note-card:hover .glass-highlight {
+            opacity: 1;
+        }
+        
+        /* Badge for notes */
+        .note-badge {
+            font-size: 0.7rem;
+            color: var(--primary-bg);
+            background-color: var(--accent-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-left: 8px;
         }
     </style>
 </head>
 <body>
     <!-- Page Header -->
     <div class="page-header">
-            
         <div class="container">
-            <h1 class="text-center mb-0"><i class="fas fa-sticky-note me-2"></i>Personal Notes</h1>
+            <h1 class="text-center mb-0 header-glow"><i class="fas fa-sticky-note me-2"></i>Personal Notes</h1>
         </div>
     </div>
 
@@ -113,10 +224,14 @@
                 <h4 class="section-header">我的筆記列表</h4>
                 
                 {% for note in notes %}
-                <div class="note-card p-4">
+                <div class="note-card p-4 position-relative">
+                    <div class="glass-highlight"></div>
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <a href="{% url 'showdetail' note.slug %}" class="note-title">{{ note.title }}</a>
+                            <div class="d-flex align-items-center">
+                                <a href="{% url 'showdetail' note.slug %}" class="note-title">{{ note.title }}</a>
+                                <span class="note-badge">Note</span>
+                            </div>
                             <p class="note-content mb-0">{{ note.content|truncatechars:100 }}</p>
                         </div>
                     </div>
@@ -134,7 +249,7 @@
                 </div>
                 {% empty %}
                 <div class="empty-state">
-                    <i class="fas fa-clipboard fs-1 mb-3"></i>
+                    <i class="fas fa-clipboard fs-1 mb-3 text-secondary"></i>
                     <h5>沒有筆記</h5>
                     <p>創建您的第一個筆記開始使用吧！</p>
                 </div>
