@@ -14,13 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.contrib import admin 
+from django.contrib.auth import views as auth_views #導入模組
 from django.urls import path
-from mysite.views import homepage , showdetail , delete_note , edit_note 
+from mysite.views import homepage , showdetail , delete_note , edit_note ,login
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('homepage/',homepage , name='homepage'),
     path('index/<slug:slug>',showdetail , name = 'showdetail'),
     path('delete/<slug:note_slug>/', delete_note, name='delete_note'),  #將前面的路徑存入name裡面
     path('edit_note/<slug:edit_note_slug>' , edit_note , name = 'edit_note'),
+    path('',auth_views.LoginView.as_view(),name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'), #使用內建登出方法 不需額外撰寫views.py 
+
 ]
