@@ -51,6 +51,7 @@ def edit_note(request , edit_note_slug):
     return render(request , 'edit_note.html', {'note_dic': note}) #鍵是 'note'，而值是變數 note  用字典會比local()安全且快速
 
 def login(request):
+<<<<<<< HEAD
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('homepage'))
     username = request.POST.get('username') #從表單中的name取得資料
@@ -70,3 +71,6 @@ class sign_up(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'sign_up.html'
+=======
+    return render(request,'login.html')
+>>>>>>> 8746bbd2e7653d8375c0f57a5ebfa094a943af70

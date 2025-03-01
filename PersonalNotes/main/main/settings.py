@@ -122,4 +122,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+<<<<<<< HEAD
 LOGIN_URL = 'login'  # 這裡 'login' 是你登入視圖的 URL 名稱
+=======
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/homepage/'  #設定登入後要導向哪裡
+LOGOUT_REDIRECT_URL = ''    #設定登出後要導向哪裡
+>>>>>>> 8746bbd2e7653d8375c0f57a5ebfa094a943af70
