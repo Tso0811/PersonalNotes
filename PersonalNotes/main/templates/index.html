@@ -207,6 +207,17 @@
             display: inline-block;
             margin-left: 8px;
         }
+
+        .btn-logout {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
@@ -214,9 +225,18 @@
     <div class="page-header">
         <div class="container">
             <h1 class="text-center mb-0 header-glow"><i class="fas fa-sticky-note me-2"></i>Personal Notes</h1>
+            <form action="{% url 'logout' %}" method="POST" class="position-absolute" style="top: 0; right: 0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-logout">
+                    <i class="fas fa-sign-out-alt me-1"></i> 登出
+                </button>
+            </form>
         </div>
+   
     </div>
 
+ 
+    
     <div class="container">
         <div class="row">
             <!-- Notes List Section -->
