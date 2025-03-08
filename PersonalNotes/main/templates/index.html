@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Notes</title>
+    <title>個人筆記</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -21,14 +21,14 @@
             --danger-hover: #a82e42;
             --border-color: #383838;
         }
-        
+
         body {
             background-color: var(--primary-bg);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-primary);
             padding-bottom: 40px;
         }
-        
+
         .page-header {
             background: linear-gradient(135deg, #4a1d96 0%, #8b5cf6 100%);
             color: white;
@@ -38,7 +38,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .page-header::after {
             content: "";
             position: absolute;
@@ -50,7 +50,7 @@
             background-size: 5px 5px;
             opacity: 0.1;
         }
-        
+
         .note-card {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -60,36 +60,24 @@
             border: 1px solid var(--border-color);
             overflow: hidden;
         }
-        
+
         .note-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
             border-color: var(--accent-color);
         }
-        
+
         .note-title {
             font-size: 1.3rem;
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
         }
-        
+
         .note-title:hover {
             color: var(--accent-color);
         }
-        
-        .note-content {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-top: 5px;
-        }
-        
-        .note-actions {
-            border-top: 1px solid var(--border-color);
-            padding-top: 12px;
-            margin-top: 12px;
-        }
-        
+
         .form-container {
             background: var(--secondary-bg);
             padding: 25px;
@@ -97,7 +85,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
             border: 1px solid var(--border-color);
         }
-        
+
         .section-header {
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
@@ -105,7 +93,7 @@
             color: var(--text-primary);
             position: relative;
         }
-        
+
         .section-header::after {
             content: "";
             position: absolute;
@@ -115,7 +103,7 @@
             height: 2px;
             background-color: var(--accent-color);
         }
-        
+
         .empty-state {
             text-align: center;
             padding: 40px;
@@ -124,178 +112,94 @@
             border-radius: 12px;
             border: 1px dashed var(--border-color);
         }
-        
+
         .btn-custom-primary {
             background-color: var(--accent-color);
             border-color: var(--accent-color);
             color: #fff;
         }
-        
+
         .btn-custom-primary:hover {
             background-color: var(--accent-color-hover);
             border-color: var(--accent-color-hover);
         }
-        
-        .btn-custom-outline {
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-            background-color: transparent;
-        }
-        
-        .btn-custom-outline:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        
-        .btn-custom-danger {
-            color: var(--danger-color);
-            border-color: var(--danger-color);
-            background-color: transparent;
-        }
-        
-        .btn-custom-danger:hover {
-            background-color: var(--danger-color);
-            color: white;
-        }
-        
-        .form-control, .form-select {
+
+        .form-control, .form-control:focus {
             background-color: var(--primary-bg);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
         }
-        
-        .form-control:focus, .form-select:focus {
-            background-color: var(--primary-bg);
-            color: var(--text-primary);
+
+        .form-control:focus {
             border-color: var(--accent-color);
             box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
         }
-        
+
         .form-label {
             color: var(--text-primary);
         }
-        
-        /* Neon glow effect for header */
+
         .header-glow {
             text-shadow: 0 0 10px rgba(187, 134, 252, 0.7);
         }
-        
-        /* Glassmorphism for card highlight */
-        .glass-highlight {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            background: radial-gradient(circle, rgba(187, 134, 252, 0.1) 0%, rgba(187, 134, 252, 0) 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .note-card:hover .glass-highlight {
-            opacity: 1;
-        }
-        
-        /* Badge for notes */
-        .note-badge {
-            font-size: 0.7rem;
-            color: var(--primary-bg);
-            background-color: var(--accent-color);
-            padding: 0.2rem 0.5rem;
-            border-radius: 12px;
-            display: inline-block;
-            margin-left: 8px;
-        }
-
-        .btn-logout {
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-            background-color: rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-        }
     </style>
 </head>
+
 <body>
-    <!-- Page Header -->
+    <!-- 頁面標頭 -->
     <div class="page-header">
         <div class="container">
-            <h1 class="text-center mb-0 header-glow"><i class="fas fa-sticky-note me-2"></i>Personal Notes</h1>
-            <form action="{% url 'logout' %}" method="POST" class="position-absolute" style="top: 0; right: 0;">
+            <h1 class="text-center mb-0 header-glow">
+                <i class="fas fa-sticky-note me-2"></i>我的筆記
+            </h1>
+            <!-- 登出表單 -->
+            <form action="{% url 'logout' %}" method="POST" class="position-absolute" style="top: 20px; right: 20px; z-index: 1000;">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-logout">
-                    <i class="fas fa-sign-out-alt me-1"></i> 登出
+                <button type="submit" class="btn btn-custom-primary">
+                    <i class="fas fa-sign-out-alt me-1"></i>登出
                 </button>
             </form>
         </div>
-   
     </div>
 
- 
-    
     <div class="container">
         <div class="row">
-            <!-- Notes List Section -->
+            <!-- 筆記列表區塊 -->
             <div class="col-lg-8">
-                <h4 class="section-header">我的筆記列表</h4>
-                
+                <h4 class="section-header">筆記列表</h4>
                 {% for note in notes %}
-                <div class="note-card p-4 position-relative">
-                    <div class="glass-highlight"></div>
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <div class="d-flex align-items-center">
+                    <div class="note-card p-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
                                 <a href="{% url 'showdetail' note.slug %}" class="note-title">{{ note.title }}</a>
-                                <span class="note-badge">Note</span>
                             </div>
-                            <p class="note-content mb-0">{{ note.content|truncatechars:100 }}</p>
+                            <!-- 刪除表單 -->
+                            <form action="{% url 'delete_note' note.slug %}" method="POST" style="display: inline;" onsubmit="return confirm('確定要刪除此筆記嗎？');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash-alt me-1"></i>刪除
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    <div class="note-actions d-flex justify-content-end">
-                        <a href="{% url 'edit_note' note.slug %}" class="btn btn-sm btn-custom-outline me-2">
-                            <i class="fas fa-edit me-1"></i> 編輯
-                        </a>
-                        <form action="{% url 'delete_note' note.slug %}" method="POST" style="display:inline;" onsubmit="return confirm('確定要刪除此筆記嗎？')">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-custom-danger">
-                                <i class="fas fa-trash-alt me-1"></i> 刪除
-                            </button>
-                        </form>
-                    </div>
-                </div>
                 {% empty %}
-                <div class="empty-state">
-                    <i class="fas fa-clipboard fs-1 mb-3 text-secondary"></i>
-                    <h5>沒有筆記</h5>
-                    <p>創建您的第一個筆記開始使用吧！</p>
-                </div>
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard fs-1 mb-3 text-secondary"></i>
+                        <h5>尚無筆記</h5>
+                        <p>創建您的第一個筆記開始使用吧！</p>
+                    </div>
                 {% endfor %}
             </div>
-            
-            <!-- Add Note Form Section -->
+
+            <!-- 新增筆記表單區塊 -->
             <div class="col-lg-4">
                 <div class="form-container sticky-top" style="top: 20px;">
                     <h4 class="section-header">新增筆記</h4>
-                    <form action="" method="POST">
+                    <form method="post">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="title" class="form-label">標題:</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="slug" class="form-label">Slug:</label>
-                            <input type="text" class="form-control" id="slug" name="slug" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="content" class="form-label">內容:</label>
-                            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-                        </div>
+                        {{ form.as_p }}
                         <button type="submit" class="btn btn-custom-primary w-100">
-                            <i class="fas fa-plus-circle me-1"></i> 新增筆記
+                            <i class="fas fa-plus-circle me-1"></i>新增筆記
                         </button>
                     </form>
                 </div>
@@ -303,7 +207,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

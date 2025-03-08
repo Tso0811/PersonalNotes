@@ -1,27 +1,29 @@
 from django.shortcuts import render , redirect , get_object_or_404
-from django.http import HttpResponse , HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic import  CreateView
 from mysite.models import Note
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse , reverse_lazy
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from mysite.form import NoteForm
 
 # Create your views here.
 @login_required
-def homepage(request) :
+def homepage(request):
     if request.method == 'POST':
-        title = request.POST['title']
-        slug = request.POST['slug']
-        content = request.POST['content']
-        note = Note(title=title,slug=slug,content=content)
-        note.save()
-        return redirect('homepage')
+        form = NoteForm(request.POST) #處裡表單 表單的欄位在NoteForm中定義 圖像則在html檔案中顯示
+        if form.is_valid():
+            note = form.save(commit=False) #儲存表單但不提交
+            note.user = request.user # 將當前使用者指派給 note 的 user 欄位
+            note.save()
+            return redirect('homepage')
+    else :
+        form = NoteForm()
     
-    notes = Note.objects.all().order_by('-add_time')
-    
-    return render(request,'index.html',{'notes':notes})
-
+    notes = Note.objects.filter(user=request.user).order_by('-add_time')  # Note.objects.all()，會顯示所有筆記 用過濾器只顯示目前使者的筆記
+    return render(request, 'index.html', {'notes': notes, 'form': form})
+        
 @login_required
 def showdetail (request , slug ):
     detail = Note.objects.get(slug = slug)
