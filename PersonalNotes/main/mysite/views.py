@@ -4,9 +4,11 @@ from django.views.generic import  CreateView
 from mysite.models import Note
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse , reverse_lazy
-from django.contrib import auth
+from django.contrib import auth , messages
 from django.contrib.auth.decorators import login_required
 from mysite.form import NoteForm
+from django.conf import settings
+import requests
 
 # Create your views here.
 @login_required
@@ -20,9 +22,21 @@ def homepage(request):
             return redirect('homepage')
     else :
         form = NoteForm()
+        
+    api_key = settings.WEATHER_API_KEY   
+    city = "Taipei"  
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  
+        weather_data = response.json()
+    except requests.exceptions.RequestException as e:
+        weather_data = None
+        messages.error(request, f"無法獲取天氣資訊：{str(e)}")
+
     
     notes = Note.objects.filter(user=request.user).order_by('-add_time')  # Note.objects.all()，會顯示所有筆記 用過濾器只顯示目前使者的筆記
-    return render(request, 'index.html', {'notes': notes, 'form': form})
+    return render(request , 'index.html' , {'notes': notes , 'form': form , 'weather':weather_data})
         
 @login_required
 def showdetail (request , slug ):

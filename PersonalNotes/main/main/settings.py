@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -129,3 +129,4 @@ LOGIN_URL = 'login'  #直接寫入網址試圖進入網頁時會導向的地方
 LOGIN_REDIRECT_URL = 'homepage'  #成功登入後會導向的地方
 LOGOUT_REDIRECT_URL = 'login'    #設定登出後要導向哪裡
 
+WEATHER_API_KEY = config('WEATHER_API_KEY')
