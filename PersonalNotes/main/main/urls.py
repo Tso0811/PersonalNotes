@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('homepage/',homepage , name='homepage'),
     path('index/<slug:slug>',showdetail , name = 'showdetail'),
-    path('delete/<slug:note_slug>/', delete_note, name='delete_note'),  #將前面的路徑存入name裡面
+    path('delete/<slug:slug>/', delete_note, name='delete_note'),  #將前面的路徑存入name裡面
     path('edit_note/<slug:edit_note_slug>' , edit_note , name = 'edit_note'),
     path('' , login , name = 'login'),
     path('sign_up/', sign_up.as_view(), name = "sign_up"),

@@ -26,20 +26,20 @@ def homepage(request):
         
 @login_required
 def showdetail (request , slug ):
-    detail = Note.objects.get(slug = slug)
-    return render(request , 'showdetail.html' , locals())
+    detail = get_object_or_404(Note , slug = slug , user = request.user) #加入判斷使用者 避免非使用者輸入url來查看其他人的筆記
+    return render(request , 'showdetail.html' , {'detail' : detail})
 
 @login_required
-def delete_note(request , note_slug): #從urls.py中取得slug
+def delete_note(request , slug): #從urls.py中取得slug
+    note = get_object_or_404(Note , slug = slug , user = request.user )
     if request.method == 'POST':
-        note = get_object_or_404(Note, slug = note_slug) #如果找到指定的條件 會return 反之則return 404錯誤
         note.delete()
     return redirect('homepage')  
     
 
 @login_required
 def edit_note(request , edit_note_slug):
-    note = get_object_or_404(Note,slug=edit_note_slug)
+    note = get_object_or_404(Note , slug = edit_note_slug , user = request.user)
     if request.method == 'POST':
         title = request.POST.get('title')
         slug = request.POST.get('slug')
